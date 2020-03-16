@@ -13,7 +13,7 @@ include/types.h
 doc/html
 
 # VisualStudioCode
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -23,3 +23,6 @@ doc/html
 CMakeSettings.json
 out/
 .vs/
+code/
+*.png
+*.bat

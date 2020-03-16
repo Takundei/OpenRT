@@ -72,13 +72,18 @@ namespace rt {
 					const size_t nSamples = pLight->getNumberOfSamples();
 					for (size_t s = 0; s < nSamples; s++) {
 						// get direction to light, and intensity
+						//Set the params for ray.hit->getnormal(ray), reset properties t,hit and hit modified by illuminate
+						I.hit = ray.hit;
+						//or set ray.property = normal ?
 						auto radiance = pLight->illuminate(I);
-						if (radiance && (!pLight->shadow() || !m_scene.occluded(I))) {
+						bool occluded = !m_scene.occluded(I);
+						if (radiance && (!pLight->shadow() || occluded)) {
 							// ------ diffuse ------
 							if (m_kd > 0) {
+								float d = occluded ? 1.0f : 0.0f; //use to view the image with occlusion as white values 0.0f : 1.0f;
 								float cosLightNormal = I.dir.dot(n);
 								if (cosLightNormal > 0)
-									L += m_kd * cosLightNormal * color.mul(radiance.value());
+									L += m_kd * cosLightNormal * color.mul(radiance.value())*d;
 							}
 							// ------ specular ------
 							if (m_ks > 0) {

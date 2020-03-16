@@ -29,6 +29,10 @@
 
 #include "core/LightSpot.h"
 
+#include "core/LightSky.h"
+
+#include "core/CosineSampler.h"
+
 /**
 Main page documentation
 */
