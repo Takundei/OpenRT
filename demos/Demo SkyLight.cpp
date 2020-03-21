@@ -17,17 +17,17 @@ int main(int argc, char* argv[]) {
 
 	// Floor
 	float s = 3;
-	scene.add(CSolidQuad(pShaderWhite, Vec3f(-s, 0, -s), Vec3f(-s, 0, s), Vec3f(s, 0, s), Vec3f(s, 0, -s)));
+	// scene.add(CSolidQuad(pShaderWhite, Vec3f(-s, 0, -s), Vec3f(-s, 0, s), Vec3f(s, 0, s), Vec3f(s, 0, -s)));
 	
 	// Ball
-	scene.add(std::make_shared<CPrimSphere>(pShaderWhite, Vec3f(0, 0.5, 0), 1.5f));
+	scene.add(CSolid(pShaderWhite, "C:\\Users\\GoraT\\Documents\\models\\eaton.obj"));
 	
 	// Camera
-	scene.add(std::make_shared<CCameraPerspectiveTarget>(Vec3f(4, 4, 4), Vec3f(0, 0.5f, 0), Vec3f(0, 1, 0), 45.0f, Size(720, 720)));
+	scene.add(std::make_shared<CCameraPerspectiveTarget>(Vec3f(0.201876 , -20.9304, -3.60727), Vec3f(1, 0, 0), Vec3f(0, 0, 1), 45.0f, Size(720, 720)));
 	
 	// Light 
 //	scene.add(std::make_shared<CLightPoint>(RGB(10, 10, 10), Vec3f(4, 4, 0)));
-	scene.add(std::make_shared<CLightSky>(RGB(1, 1, 1)));
+	scene.add(std::make_shared<CLightSky>(RGB(1, 1, 1),1.0f,std::make_shared<CSamplerStratified>(1, true, true)));
 
 //	auto pSkyLight = std::make_shared<CShaderAmbientOccluson>(scene, Vec3f(1, -1, 1), 0.7, samples);
 //	scene.add(pSkyLight);
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 
 	imshow("image", img);
 	waitKey();
-	//imwrite( std::to_string(samples) + "time" +std::to_string(delta.count()) +".png", img);
+	imwrite( "out.png", img);
 
 	return 0;
 }
